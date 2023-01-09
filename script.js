@@ -1,5 +1,6 @@
+const boardItems = document.querySelectorAll('.board-item');
+const n = 3;
 const gameBoard = (() => {
-  const n = 3;
   let moveCount = 0;
   let board = [
     [".", ".", "."],
@@ -70,9 +71,9 @@ const gameBoard = (() => {
 
 const player = (name, symbol) => ({ name, symbol });
 
-const displayController = (x, y) => {
+const displayController = (() => {
   let turn = 0;
-  const nextTurn = () => {
+  const nextTurn = (x, y) => {
     if (turn % 2 === 0) {
       gameBoard.set(x, y, "X");
     } else {
@@ -81,6 +82,16 @@ const displayController = (x, y) => {
     turn += 1;
   };
   return { nextTurn };
-};
+})();
 const player1 = player("Michael", "X");
 const player2 = player("Computer", "O");
+
+boardItems.forEach((item) => {
+  item.addEventListener('click', () => {
+    console.log(item.id);
+    const id = parseInt(item.id, 10);
+    const x = Math.floor(id / n);
+    const y = (id % n);
+    displayController.nextTurn(x, y);
+  });
+});

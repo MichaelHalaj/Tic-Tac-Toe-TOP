@@ -8,6 +8,10 @@ body{
     grid-template-columns: repeat(3, 50px);
     grid-template-rows: repeat(3, 50px);
 }
-.board div{
+.board-item{
     border: 1px solid black;
+    cursor: pointer;
+}
+.board-item:hover{
+    background-color: rgb(201, 201, 201);
 }
