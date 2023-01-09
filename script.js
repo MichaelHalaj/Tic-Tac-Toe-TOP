@@ -8,12 +8,14 @@ const gameBoard = (() => {
   ];
   const drawBoard = () => {};
   const checkBoard = (x, y, symbol) => {
+    moveCount += 1;
     for (let i = 0; i < n; i++) {
       if (board[x][i] !== symbol) {
         break;
       }
       if (i === n - 1) {
-        //return winner
+        // return winner
+        console.log(symbol);
       }
     }
     for (let i = 0; i < n; i++) {
@@ -21,7 +23,8 @@ const gameBoard = (() => {
         break;
       }
       if (i === n - 1) {
-        //return winner
+        // return winner
+        console.log(symbol);
       }
     }
     if (x === y) {
@@ -30,7 +33,8 @@ const gameBoard = (() => {
           break;
         }
         if (i === n - 1) {
-          //return winner
+          // return winner
+          console.log(symbol);
         }
       }
     }
@@ -40,16 +44,22 @@ const gameBoard = (() => {
           break;
         }
         if (i === n - 1) {
-          //return winner
+          // return winner
+          console.log(symbol);
         }
       }
+    }
+    if (moveCount === n * n - 1) {
+      // return draw
+      console.log("draw");
     }
   };
   const set = (x, y, symbol) => {
     if (board[x][y] === ".") {
       board[x][y] = symbol;
     }
-    checkBoard();
+    checkBoard(x, y, symbol);
+    console.table(board);
   };
   const display = () => {
     console.log(board);
@@ -60,5 +70,5 @@ const gameBoard = (() => {
 
 const player = (name, symbol) => ({ name, symbol });
 
-const player1 = player("X");
-const player2 = player("O");
+const player1 = player("Michael", "X");
+const player2 = player("Computer", "O");
