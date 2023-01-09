@@ -70,5 +70,17 @@ const gameBoard = (() => {
 
 const player = (name, symbol) => ({ name, symbol });
 
+const displayController = (x, y) => {
+  let turn = 0;
+  const nextTurn = () => {
+    if (turn % 2 === 0) {
+      gameBoard.set(x, y, "X");
+    } else {
+      gameBoard.set(x, y, "O");
+    }
+    turn += 1;
+  };
+  return { nextTurn };
+};
 const player1 = player("Michael", "X");
 const player2 = player("Computer", "O");
