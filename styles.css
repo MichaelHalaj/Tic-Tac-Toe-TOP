@@ -15,3 +15,6 @@ body{
 .board-item:hover{
     background-color: rgb(201, 201, 201);
 }
+.disable{
+    cursor: default;
+}
