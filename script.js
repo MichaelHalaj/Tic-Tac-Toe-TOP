@@ -85,8 +85,9 @@ const displayController = (() => {
       "http://www.w3.org/2000/svg",
       "svg"
     );
-    symbol.setAttribute("style", "width:24px;height:24px");
+    symbol.setAttribute("style", "width:100%;height:100%;");
     symbol.setAttribute("viewBox", "0 0 24 24");
+    symbol.setAttribute("preserveAspectRatio", "xMaxYMax meet");
     const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
     if (turn % 2 === 0) {
       // create X icon
