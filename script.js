@@ -12,9 +12,21 @@ const gameBoard = (() => {
       // return winner
       const winnerBanner = document.querySelector(".winner-banner");
       const winnerMessage = document.querySelector(".winner-message");
+      const newGame = document.querySelector(".new-game");
       winnerBanner.classList.remove("hide");
       winnerMessage.innerText = `${player.name} wins!`;
       /*winnerBanner.appendChild(winnerMessage);*/
+      start.disabled = true;
+      const allMarkers = document.querySelectorAll(".board-item");
+      allMarkers.forEach((item) => {
+        item.removeEventListener("click", incrementTurn);
+      });
+
+      newGame.addEventListener("click", () => {
+        boardItemsEvents();
+        winnerBanner.classList.add("hide");
+        start.disabled = false;
+      });
       console.log(player);
     }
   };
@@ -136,12 +148,17 @@ const displayController = (() => {
   return { nextTurn, resetGame };
 })();
 
-
 function incrementTurn(item) {
   const id = parseInt(item.target.id, 10);
   const x = Math.floor(id / n);
   const y = id % n;
-  displayController.nextTurn(item.target, item.target.player1, item.target.player2, x, y);
+  displayController.nextTurn(
+    item.target,
+    item.target.player1,
+    item.target.player2,
+    x,
+    y
+  );
 }
 function boardItemsEvents() {
   const boardItems = document.querySelectorAll(".board-item");
