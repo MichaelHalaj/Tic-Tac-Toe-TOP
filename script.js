@@ -145,7 +145,7 @@ function incrementTurn(item) {
 }
 function boardItemsEvents() {
   const boardItems = document.querySelectorAll(".board-item");
-  const player1 = player("Michael", "X");
+  const player1 = player("Michaelhjkasdhaskjdh", "X");
   const player2 = player("Computer", "O");
   displayController.resetGame();
   boardItems.forEach((item) => {

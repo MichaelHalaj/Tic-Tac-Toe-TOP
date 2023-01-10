@@ -44,8 +44,8 @@ svg{
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    width: calc(var(--grid-item-size) * 3 * 1.5);
-    height: 30%;
+    width: fit-content;
+    height: 25%;
     top: 0;
     bottom: 0;
     margin: auto;
