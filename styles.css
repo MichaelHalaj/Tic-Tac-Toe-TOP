@@ -52,7 +52,8 @@ svg {
   color: #f8fafc;
 }
 .winner-banner {
-  background: #a2e635ce;
+  /*background: #a2e635ce;*/
+  background: #64748bd3;
   box-shadow: 0 0 10px #a1a1aa;
   display: flex;
   flex-direction: column;
