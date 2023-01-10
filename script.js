@@ -7,35 +7,38 @@ const gameBoard = (() => {
     [".", ".", "."],
     [".", ".", "."],
   ];
-  const checkBoard = (x, y, symbol) => {
+  const checkEndGame = (i, player) => {
+    if (i === n - 1) {
+      // return winner
+      const winnerBanner = document.querySelector(".winner-banner");
+      const winnerMessage = document.querySelector(".winner-message");
+      winnerBanner.classList.remove("hide");
+      winnerMessage.innerText = `${player.name} wins!`;
+      /*winnerBanner.appendChild(winnerMessage);*/
+      console.log(player);
+    }
+  };
+  const checkBoard = (x, y, player) => {
+    const { symbol } = player;
     moveCount += 1;
     for (let i = 0; i < n; i++) {
       if (board[x][i] !== symbol) {
         break;
       }
-      if (i === n - 1) {
-        // return winner
-        console.log(symbol);
-      }
+      checkEndGame(i, player);
     }
     for (let i = 0; i < n; i++) {
       if (board[i][y] !== symbol) {
         break;
       }
-      if (i === n - 1) {
-        // return winner
-        console.log(symbol);
-      }
+      checkEndGame(i, player);
     }
     if (x === y) {
       for (let i = 0; i < n; i++) {
         if (board[i][i] !== symbol) {
           break;
         }
-        if (i === n - 1) {
-          // return winner
-          console.log(symbol);
-        }
+        checkEndGame(i, player);
       }
     }
     if (x + y === n - 1) {
@@ -43,10 +46,7 @@ const gameBoard = (() => {
         if (board[i][n - 1 - i] !== symbol) {
           break;
         }
-        if (i === n - 1) {
-          // return winner
-          console.log(symbol);
-        }
+        checkEndGame(i, player);
       }
     }
     if (moveCount === n * n) {
@@ -54,11 +54,12 @@ const gameBoard = (() => {
       console.log("draw");
     }
   };
-  const set = (x, y, symbol) => {
+  const set = (x, y, player) => {
+    const { symbol } = player;
     if (board[x][y] === ".") {
       board[x][y] = symbol;
     }
-    checkBoard(x, y, symbol);
+    checkBoard(x, y, player);
     console.table(board);
   };
   const display = () => {
@@ -106,11 +107,11 @@ const displayController = (() => {
     symbol.appendChild(path);
     item.appendChild(symbol);
   };
-  const nextTurn = (item, id, x, y) => {
+  const nextTurn = (item, player1, player2, x, y) => {
     if (turn % 2 === 0) {
-      gameBoard.set(x, y, "X");
+      gameBoard.set(x, y, player1);
     } else {
-      gameBoard.set(x, y, "O");
+      gameBoard.set(x, y, player2);
     }
     createSymbol(item);
     turn += 1;
@@ -134,20 +135,22 @@ const displayController = (() => {
   };
   return { nextTurn, resetGame };
 })();
-const player1 = player("Michael", "X");
-const player2 = player("Computer", "O");
+
 
 function incrementTurn(item) {
-  console.log(item.target.id);
   const id = parseInt(item.target.id, 10);
   const x = Math.floor(id / n);
   const y = id % n;
-  displayController.nextTurn(item.target, id, x, y);
+  displayController.nextTurn(item.target, item.target.player1, item.target.player2, x, y);
 }
 function boardItemsEvents() {
   const boardItems = document.querySelectorAll(".board-item");
+  const player1 = player("Michael", "X");
+  const player2 = player("Computer", "O");
   displayController.resetGame();
   boardItems.forEach((item) => {
+    item.player1 = player1;
+    item.player2 = player2;
     item.addEventListener("click", incrementTurn, { once: true });
   });
 }
