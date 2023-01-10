@@ -23,7 +23,7 @@ const gameBoard = (() => {
     start.disabled = true;
     const allMarkers = document.querySelectorAll(".board-item");
     allMarkers.forEach((item) => {
-      item.classList.add("no-hover")
+      item.classList.add("no-hover");
       item.removeEventListener("click", incrementTurn);
     });
 

@@ -32,6 +32,10 @@ svg {
 }
 .game {
   /* position: relative; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .title,
 .winner-message {
@@ -64,6 +68,6 @@ svg {
 .hide {
   display: none;
 }
-.no-hover{
-    pointer-events: none;
+.no-hover {
+  pointer-events: none;
 }
