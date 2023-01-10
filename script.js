@@ -73,12 +73,16 @@ const player = (name, symbol) => ({ name, symbol });
 
 const displayController = (() => {
   let turn = 0;
-  const nextTurn = (x, y) => {
+  const nextTurn = (item, id, x, y) => {
+    const symbol = document.createElement("div");
     if (turn % 2 === 0) {
       gameBoard.set(x, y, "X");
+      symbol.classList.add("x");
     } else {
       gameBoard.set(x, y, "O");
+      symbol.classList.add("o");
     }
+    item.appendChild(symbol);
     turn += 1;
   };
   return { nextTurn };
@@ -92,6 +96,6 @@ boardItems.forEach((item) => {
     const id = parseInt(item.id, 10);
     const x = Math.floor(id / n);
     const y = (id % n);
-    displayController.nextTurn(x, y);
+    displayController.nextTurn(item, id, x, y);
   });
 });

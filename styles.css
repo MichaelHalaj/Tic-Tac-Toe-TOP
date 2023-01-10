@@ -18,3 +18,10 @@ body{
 .disable{
     cursor: default;
 }
+.x{
+    background-image: url("icons/close.svg");
+    width: 25px;
+}
+.o{
+    background-image: url("icons//radiobox-blank.svg");
+}
