@@ -1,5 +1,5 @@
-const boardItems = document.querySelectorAll(".board-item");
 const n = 3;
+const start = document.querySelector(".start");
 const gameBoard = (() => {
   let moveCount = 0;
   let board = [
@@ -64,8 +64,16 @@ const gameBoard = (() => {
   const display = () => {
     console.log(board);
   };
+  const resetBoard = () => {
+    board = [
+      [".", ".", "."],
+      [".", ".", "."],
+      [".", ".", "."],
+    ];
+    moveCount = 0;
+  };
 
-  return { set, display };
+  return { set, resetBoard };
 })();
 
 const player = (name, symbol) => ({ name, symbol });
@@ -107,17 +115,39 @@ const displayController = (() => {
     createSymbol(item);
     turn += 1;
   };
-  return { nextTurn };
+  const clear = () => {
+    if (turn === 0) {
+      return;
+    }
+    const allMarkers = document.querySelectorAll(".board-item");
+    allMarkers.forEach((item) => {
+      while (item.firstChild) {
+        item.removeChild(item.firstChild);
+      }
+    });
+  };
+  const resetGame = () => {
+    clear();
+    turn = 0;
+    gameBoard.resetBoard();
+  };
+  return { nextTurn, resetGame };
 })();
 const player1 = player("Michael", "X");
 const player2 = player("Computer", "O");
-
-boardItems.forEach((item) => {
-  item.addEventListener("click", () => {
-    console.log(item.id);
-    const id = parseInt(item.id, 10);
-    const x = Math.floor(id / n);
-    const y = id % n;
-    displayController.nextTurn(item, id, x, y);
-  }, { once: true });
+function boardItemsEvents() {
+  const boardItems = document.querySelectorAll(".board-item");
+  displayController.resetGame();
+  boardItems.forEach((item) => {
+    item.addEventListener("click", () => {
+      console.log(item.id);
+      const id = parseInt(item.id, 10);
+      const x = Math.floor(id / n);
+      const y = id % n;
+      displayController.nextTurn(item, id, x, y);
+    }, { once: true });
+  });
+}
+start.addEventListener("click", () => {
+  boardItemsEvents();
 });
