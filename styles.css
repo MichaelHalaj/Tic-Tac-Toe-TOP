@@ -5,11 +5,13 @@ body,html{
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-size: 16px;
+    --grid-item-size: 150px
 }
 .board{
     display: grid;
-    grid-template-columns: repeat(3, 150px);
-    grid-template-rows: repeat(3, 150px);
+    grid-template-columns: repeat(3, var(--grid-item-size));
+    grid-template-rows: repeat(3, var(--grid-item-size));
     gap: 4px;
 }
 .board-item{
@@ -30,12 +32,20 @@ svg{
 .game{
    /* position: relative; */
 }
+.title,
+.winner-message{
+    font-size: 4em;
+}
 .winner-banner{
     background: #a3e635;
+    box-shadow: 0 0 10px #a1a1aa;
     display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
     justify-content: center;
-    width: 75%;
-    height: 15%;
+    align-items: center;
+    width: calc(var(--grid-item-size) * 3 * 1.5);
+    height: 30%;
     top: 0;
     bottom: 0;
     margin: auto;
@@ -43,7 +53,11 @@ svg{
     left: 0;
     right: 0;
 }
+.message{
+    display: flex;
+    align-items: center;
+}
 .winner-message{
-
+    text-align: center;
 }
 
