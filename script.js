@@ -123,6 +123,7 @@ const displayController = (() => {
     allMarkers.forEach((item) => {
       while (item.firstChild) {
         item.removeChild(item.firstChild);
+        item.removeEventListener("click", incrementTurn);
       }
     });
   };
@@ -135,17 +136,19 @@ const displayController = (() => {
 })();
 const player1 = player("Michael", "X");
 const player2 = player("Computer", "O");
+
+function incrementTurn(item) {
+  console.log(item.target.id);
+  const id = parseInt(item.target.id, 10);
+  const x = Math.floor(id / n);
+  const y = id % n;
+  displayController.nextTurn(item.target, id, x, y);
+}
 function boardItemsEvents() {
   const boardItems = document.querySelectorAll(".board-item");
   displayController.resetGame();
   boardItems.forEach((item) => {
-    item.addEventListener("click", () => {
-      console.log(item.id);
-      const id = parseInt(item.id, 10);
-      const x = Math.floor(id / n);
-      const y = id % n;
-      displayController.nextTurn(item, id, x, y);
-    }, { once: true });
+    item.addEventListener("click", incrementTurn, { once: true });
   });
 }
 start.addEventListener("click", () => {
