@@ -181,8 +181,8 @@ function incrementTurn(item) {
 }
 function boardItemsEvents() {
   const boardItems = document.querySelectorAll(".board-item");
-  const player1 = player("Michaelhjkasdhaskjdh", "X");
-  const player2 = player("Computer", "O");
+  const player1 = player("Player 1", "X");
+  const player2 = player("Player 2", "O");
   displayController.resetGame();
   boardItems.forEach((item) => {
     item.classList.remove("no-hover");

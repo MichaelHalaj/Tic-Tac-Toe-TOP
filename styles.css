@@ -12,6 +12,9 @@ html {
   font-size: 16px;
   gap: var(--element-gap);
 }
+button{
+    font-family: "Montserrat", sans-serif;
+}
 .board {
   display: grid;
   grid-template-columns: repeat(3, var(--grid-item-size));
@@ -85,7 +88,7 @@ svg {
 .start,
 .new-game {
   font-size: 1.4em;
-  color: #111827;
+  color: #71717a;
 }
 .start:focus-visible,
 .new-game:focus-visible {
