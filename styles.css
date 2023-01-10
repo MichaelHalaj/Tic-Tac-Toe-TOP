@@ -1,13 +1,16 @@
 body,
 html {
+  --grid-item-size: 150px;
+  --element-gap: 24px;
+  font-family: "Montserrat", sans-serif;
   height: 100%;
-  background: linear-gradient(180deg, #e5e5e5, #f9fafb);
+  background: linear-gradient(180deg, #fdba74, #c084fc);
   background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
   align-items: center;
   font-size: 16px;
-  --grid-item-size: 150px;
+  gap: var(--element-gap);
 }
 .board {
   display: grid;
@@ -15,14 +18,19 @@ html {
   grid-template-rows: repeat(3, var(--grid-item-size));
   gap: 4px;
 }
-.board-item {
+.board-item,
+.start,
+.new-game {
   border: 1px solid #71717a;
+  background-color: #f5f5f5;
   cursor: pointer;
   border-radius: 4px;
   box-shadow: 0 0 10px #a1a1aa;
 }
-.board-item:hover {
-  background-color: rgba(201, 201, 201, 0.596);
+.board-item:hover,
+.start:hover,
+.new-game:hover {
+  background-color: #d4d4d4;
 }
 .disable {
   cursor: default;
@@ -36,13 +44,15 @@ svg {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: var(--element-gap);
 }
 .title,
 .winner-message {
   font-size: 4em;
+  color: #f8fafc;
 }
 .winner-banner {
-  background: #a2e6358f;
+  background: #a2e635ce;
   box-shadow: 0 0 10px #a1a1aa;
   display: flex;
   flex-direction: column;
@@ -50,7 +60,7 @@ svg {
   justify-content: center;
   align-items: center;
   width: fit-content;
-  height: 25%;
+  height: 200px;
   top: 0;
   bottom: 0;
   margin: auto;
@@ -69,5 +79,18 @@ svg {
   display: none;
 }
 .no-hover {
+  pointer-events: none;
+}
+.start,
+.new-game {
+  font-size: 1.4em;
+  color: #111827;
+}
+.start:focus-visible,
+.new-game:focus-visible {
+  outline: none;
+}
+.start:disabled {
+  background-color: #8d8d8d;
   pointer-events: none;
 }
