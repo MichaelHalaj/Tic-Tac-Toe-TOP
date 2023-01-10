@@ -7,7 +7,6 @@ const gameBoard = (() => {
     [".", ".", "."],
     [".", ".", "."],
   ];
-  const drawBoard = () => {};
   const checkBoard = (x, y, symbol) => {
     moveCount += 1;
     for (let i = 0; i < n; i++) {
@@ -50,7 +49,7 @@ const gameBoard = (() => {
         }
       }
     }
-    if (moveCount === n * n - 1) {
+    if (moveCount === n * n) {
       // return draw
       console.log("draw");
     }
@@ -120,5 +119,5 @@ boardItems.forEach((item) => {
     const x = Math.floor(id / n);
     const y = id % n;
     displayController.nextTurn(item, id, x, y);
-  });
+  }, { once: true });
 });
