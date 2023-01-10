@@ -13,12 +13,12 @@ const gameBoard = (() => {
     const newGame = document.querySelector(".new-game");
     const svgItems = document.querySelectorAll(".trophy");
     winnerBanner.classList.remove("hide");
-    if (draw) {
-      svgItems.forEach((svg) => svg.classList.add("hide"));
-      winnerMessage.innerText = "It's a draw";
-    } else {
+    if (!draw) {
       svgItems.forEach((svg) => svg.classList.remove("hide"));
       winnerMessage.innerText = `${player.name} wins!`;
+    } else {
+      svgItems.forEach((svg) => svg.classList.add("hide"));
+      winnerMessage.innerText = "It's a draw";
     }
     start.disabled = true;
     const allMarkers = document.querySelectorAll(".board-item");
@@ -44,30 +44,33 @@ const gameBoard = (() => {
     if (i === n - 1) {
       // return winner
       displayBanner(player, false);
+      return true;
       console.log(player);
     }
+    return false;
   };
   const checkBoard = (x, y, player) => {
     const { symbol } = player;
     moveCount += 1;
+    let endGame = false;
     for (let i = 0; i < n; i++) {
       if (board[x][i] !== symbol) {
         break;
       }
-      checkEndGame(i, player);
+      endGame = checkEndGame(i, player);
     }
     for (let i = 0; i < n; i++) {
       if (board[i][y] !== symbol) {
         break;
       }
-      checkEndGame(i, player);
+      endGame =checkEndGame(i, player);
     }
     if (x === y) {
       for (let i = 0; i < n; i++) {
         if (board[i][i] !== symbol) {
           break;
         }
-        checkEndGame(i, player);
+        endGame = checkEndGame(i, player);
       }
     }
     if (x + y === n - 1) {
@@ -75,10 +78,12 @@ const gameBoard = (() => {
         if (board[i][n - 1 - i] !== symbol) {
           break;
         }
-        checkEndGame(i, player);
+        endGame = checkEndGame(i, player);
       }
     }
-    checkDraw();
+    if (!endGame) {
+      checkDraw();
+    }
   };
   const set = (x, y, player) => {
     const { symbol } = player;
