@@ -19,6 +19,7 @@ const gameBoard = (() => {
       start.disabled = true;
       const allMarkers = document.querySelectorAll(".board-item");
       allMarkers.forEach((item) => {
+        item.classList.add("no-hover")
         item.removeEventListener("click", incrementTurn);
       });
 
@@ -166,6 +167,7 @@ function boardItemsEvents() {
   const player2 = player("Computer", "O");
   displayController.resetGame();
   boardItems.forEach((item) => {
+    item.classList.remove("no-hover");
     item.player1 = player1;
     item.player2 = player2;
     item.addEventListener("click", incrementTurn, { once: true });
