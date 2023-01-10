@@ -7,27 +7,43 @@ const gameBoard = (() => {
     [".", ".", "."],
     [".", ".", "."],
   ];
+  const displayBanner = (player, draw) => {
+    const winnerBanner = document.querySelector(".winner-banner");
+    const winnerMessage = document.querySelector(".winner-message");
+    const newGame = document.querySelector(".new-game");
+    const svgItems = document.querySelectorAll(".trophy");
+    winnerBanner.classList.remove("hide");
+    if (draw) {
+      svgItems.forEach((svg) => svg.classList.add("hide"));
+      winnerMessage.innerText = "It's a draw";
+    } else {
+      svgItems.forEach((svg) => svg.classList.remove("hide"));
+      winnerMessage.innerText = `${player.name} wins!`;
+    }
+    start.disabled = true;
+    const allMarkers = document.querySelectorAll(".board-item");
+    allMarkers.forEach((item) => {
+      item.classList.add("no-hover")
+      item.removeEventListener("click", incrementTurn);
+    });
+
+    newGame.addEventListener("click", () => {
+      boardItemsEvents();
+      winnerBanner.classList.add("hide");
+      start.disabled = false;
+    });
+  };
+  const checkDraw = () => {
+    if (moveCount === n * n) {
+      // return draw
+      console.log("draw");
+      displayBanner("none", true);
+    }
+  };
   const checkEndGame = (i, player) => {
     if (i === n - 1) {
       // return winner
-      const winnerBanner = document.querySelector(".winner-banner");
-      const winnerMessage = document.querySelector(".winner-message");
-      const newGame = document.querySelector(".new-game");
-      winnerBanner.classList.remove("hide");
-      winnerMessage.innerText = `${player.name} wins!`;
-      /*winnerBanner.appendChild(winnerMessage);*/
-      start.disabled = true;
-      const allMarkers = document.querySelectorAll(".board-item");
-      allMarkers.forEach((item) => {
-        item.classList.add("no-hover")
-        item.removeEventListener("click", incrementTurn);
-      });
-
-      newGame.addEventListener("click", () => {
-        boardItemsEvents();
-        winnerBanner.classList.add("hide");
-        start.disabled = false;
-      });
+      displayBanner(player, false);
       console.log(player);
     }
   };
@@ -62,10 +78,7 @@ const gameBoard = (() => {
         checkEndGame(i, player);
       }
     }
-    if (moveCount === n * n) {
-      // return draw
-      console.log("draw");
-    }
+    checkDraw();
   };
   const set = (x, y, player) => {
     const { symbol } = player;
