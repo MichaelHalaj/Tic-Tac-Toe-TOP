@@ -1,3 +1,8 @@
+html{
+    height: 100%;
+    background: linear-gradient(180deg, #e5e5e5, #f9fafb);
+    background-repeat: no-repeat;
+}
 body{
     display: flex;
     flex-direction: column;
@@ -5,15 +10,18 @@ body{
 }
 .board{
     display: grid;
-    grid-template-columns: repeat(3, 50px);
-    grid-template-rows: repeat(3, 50px);
+    grid-template-columns: repeat(3, 150px);
+    grid-template-rows: repeat(3, 150px);
+    gap: 4px;
 }
 .board-item{
-    border: 1px solid black;
+    border: 1px solid #71717a;
     cursor: pointer;
+    border-radius: 4px;
+    box-shadow: 0 0 10px #a1a1aa;
 }
 .board-item:hover{
-    background-color: rgb(201, 201, 201);
+    background-color: rgba(201, 201, 201, 0.596);
 }
 .disable{
     cursor: default;
