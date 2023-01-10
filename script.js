@@ -1,4 +1,4 @@
-const boardItems = document.querySelectorAll('.board-item');
+const boardItems = document.querySelectorAll(".board-item");
 const n = 3;
 const gameBoard = (() => {
   let moveCount = 0;
@@ -73,16 +73,37 @@ const player = (name, symbol) => ({ name, symbol });
 
 const displayController = (() => {
   let turn = 0;
+  const createSymbol = (item) => {
+    const symbol = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "svg"
+    );
+    symbol.setAttribute("style", "width:24px;height:24px");
+    symbol.setAttribute("viewBox", "0 0 24 24");
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    if (turn % 2 !== 0) {
+      path.setAttribute("fill", "currentColor");
+      path.setAttribute(
+        "d",
+        "M12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"
+      );
+    } else {
+      path.setAttribute("fill", "currentColor");
+      path.setAttribute(
+        "d",
+        "M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"
+      );
+    }
+    symbol.appendChild(path);
+    item.appendChild(symbol);
+  };
   const nextTurn = (item, id, x, y) => {
-    const symbol = document.createElement("div");
     if (turn % 2 === 0) {
       gameBoard.set(x, y, "X");
-      symbol.classList.add("x");
     } else {
       gameBoard.set(x, y, "O");
-      symbol.classList.add("o");
     }
-    item.appendChild(symbol);
+    createSymbol(item);
     turn += 1;
   };
   return { nextTurn };
@@ -91,11 +112,11 @@ const player1 = player("Michael", "X");
 const player2 = player("Computer", "O");
 
 boardItems.forEach((item) => {
-  item.addEventListener('click', () => {
+  item.addEventListener("click", () => {
     console.log(item.id);
     const id = parseInt(item.id, 10);
     const x = Math.floor(id / n);
-    const y = (id % n);
+    const y = id % n;
     displayController.nextTurn(item, id, x, y);
   });
 });
