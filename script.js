@@ -15,7 +15,7 @@ const gameBoard = (() => {
     winnerBanner.classList.remove("hide");
     if (!draw) {
       svgItems.forEach((svg) => svg.classList.remove("hide"));
-      winnerMessage.innerText = `${player.name} wins!`;
+      winnerMessage.innerText = `${player.name ? player.name : `Player ${player.number}`} wins!`;
     } else {
       svgItems.forEach((svg) => svg.classList.add("hide"));
       winnerMessage.innerText = "It's a draw";
@@ -108,7 +108,7 @@ const gameBoard = (() => {
   return { set, resetBoard };
 })();
 
-const player = (name, symbol) => ({ name, symbol });
+const player = (name, symbol, number) => ({ name, symbol, number });
 
 const displayController = (() => {
   let turn = 0;
@@ -181,8 +181,8 @@ function incrementTurn(item) {
 }
 function boardItemsEvents(p1, p2) {
   const boardItems = document.querySelectorAll(".board-item");
-  const player1 = player(p1, "X");
-  const player2 = player(p2, "O");
+  const player1 = player(p1, "X", 1);
+  const player2 = player(p2, "O", 2);
   displayController.resetGame();
   boardItems.forEach((item) => {
     item.classList.remove("no-hover");
