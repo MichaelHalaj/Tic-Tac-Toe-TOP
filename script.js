@@ -179,10 +179,10 @@ function incrementTurn(item) {
     y
   );
 }
-function boardItemsEvents() {
+function boardItemsEvents(p1, p2) {
   const boardItems = document.querySelectorAll(".board-item");
-  const player1 = player("Player 1", "X");
-  const player2 = player("Player 2", "O");
+  const player1 = player(p1, "X");
+  const player2 = player(p2, "O");
   displayController.resetGame();
   boardItems.forEach((item) => {
     item.classList.remove("no-hover");
@@ -191,6 +191,9 @@ function boardItemsEvents() {
     item.addEventListener("click", incrementTurn, { once: true });
   });
 }
-start.addEventListener("click", () => {
-  boardItemsEvents();
+start.addEventListener("click", (e) => {
+  e.preventDefault();
+  const player1 = document.querySelector("#player1").value;
+  const player2 = document.querySelector("#player2").value;
+  boardItemsEvents(player1, player2);
 });
