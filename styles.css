@@ -30,6 +30,12 @@ button{
   border-radius: 4px;
   box-shadow: 0 0 10px #a1a1aa;
 }
+.board-item:active{
+  justify-self: center;
+  align-self: center;
+  width: 95%;
+  height: 95%;
+}
 .board-item:hover,
 .start:hover,
 .new-game:hover {
