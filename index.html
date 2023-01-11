@@ -7,14 +7,28 @@
     <title>Tic Tac Toe</title>
     <script src="script.js" defer></script>
     <link rel="stylesheet" href="styles.css" />
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap");
-    </style>
+    <style> @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&display=swap'); </style>
   </head>
   <body>
     <div class="title">Tic-Tac-Toe</div>
     <div class="game">
+      <form action="">
+        <div class="row player1">
+          <div class="label">
+            <label for="player1">Player 1</label>
+            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+              <path fill="#F5F5F5" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
+            </svg>
+          </div>
+          <input type="text" id="player1" maxlength="20" placeholder="Player 1 Name">
+        </div>
+        <div class="row player2">
+          <label for="player2">Player 2</label>
+          <input type="text" id="player2" maxlength="20" placeholder="Player 2 Name">
+        </div>
+      </form>
       <button class="start">Start Game</button>
+
       <div class="winner-banner hide">
         <div class="message">
           <svg
